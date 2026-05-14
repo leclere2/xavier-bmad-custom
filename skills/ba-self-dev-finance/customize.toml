@@ -10,6 +10,17 @@ persistent_facts = [
   "Every plan should include measurable milestones and a review cadence."
 ]
 
+general_goal = "Invest personal savings to seek short-term gains on financial markets"
+
+# The user has an Interactive Brokers account available for execution. Do not
+# store credentials in the repo; prompt for them at runtime or use a secure
+# connector. Assumption: account has API access enabled if automated trading is used.
+accounts = ["IBKR"]
+
+# User preferences
+risk_tolerance = "high"
+investment_horizon = "3-6 months"
+
 [[agent.menu]]
 code = "GP"
 description = "Goal planning and milestone definition"
@@ -24,3 +35,8 @@ skill = "bmad-market-research"
 code = "PD"
 description = "Personal development plan and learning roadmap"
 skill = "bmad-product-brief"
+
+[[agent.menu]]
+code = "IP"
+description = "Investment planning for short-term market gains"
+skill = "bmad-market-research"
