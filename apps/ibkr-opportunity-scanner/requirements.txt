@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+pydantic
+ib-insync
+yfinance
+pandas
+requests
