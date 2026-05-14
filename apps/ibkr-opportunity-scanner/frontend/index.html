@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>IBKR Opportunity Scanner</title>
+  </head>
+  <body>
+    <h1>IBKR Opportunity Scanner</h1>
+    <div>
+      <h3>Login</h3>
+      <input id="username" placeholder="user" />
+      <input id="password" placeholder="pass" type="password" />
+      <button id="login">Login</button>
+    </div>
+
+    <div>
+      <h3>Scan</h3>
+      <input id="universe" placeholder="Comma-separated tickers, e.g. AAPL,TSLA" />
+      <input id="capital" placeholder="Capital" />
+      <button id="scan">Run Scan</button>
+    </div>
+
+    <pre id="out"></pre>
+
+    <script>
+      let token = null
+      document.getElementById('login').onclick = async () => {
+        const username = document.getElementById('username').value
+        const password = document.getElementById('password').value
+        const res = await fetch('/login', {method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username, password})})
+        const j = await res.json()
+        token = j.access_token
+        document.getElementById('out').textContent = 'Logged in. Token stored in memory.'
+      }
+
+      document.getElementById('scan').onclick = async () => {
+        const universe = document.getElementById('universe').value.split(',').map(s=>s.trim()).filter(Boolean)
+        const capital = parseFloat(document.getElementById('capital').value) || 1000
+        const res = await fetch('/scan', {method: 'POST', headers: {'Content-Type':'application/json', 'x-api-key': token}, body: JSON.stringify({universe, capital})})
+        const j = await res.json()
+        document.getElementById('out').textContent = JSON.stringify(j, null, 2)
+      }
+    </script>
+  </body>
+  </html>

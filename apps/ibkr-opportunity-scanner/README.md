@@ -39,3 +39,7 @@ curl -sS http://localhost:8001/scan | jq .
 Next steps
 - Wire `app/ibkr_connector.py` to real IBKR API credentials and enable paper trading.
 - Plug BMAD prompts to the `prompts/scan_prompt.md` to use `ba-self-dev-finance` filters when scoring.
+
+Frontend
+- A tiny frontend is available at `frontend/index.html`. The server mounts `/static` to serve it.
+	Open http://localhost:8001/static/index.html after running the server.
